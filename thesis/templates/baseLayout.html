@@ -1,0 +1,125 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <title>GrowSmart</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+
+
+  <!-- <link rel="stylesheet" href="{% static 'styles.css' %}"> -->
+
+  <link rel="stylesheet" href="/assets/css/styles.css">
+
+  <!-- Jquery for ajax calls -->
+  <script src="/assets/js/jquery-3.4.1.min.js"></script>
+
+  <!-- Alertify for confirmation prompts -->
+  <script src="/assets/alertify.js-0.3.11/lib/alertify.min.js"></script>
+  <link rel="stylesheet" href="/assets/alertify.js-0.3.11/themes//alertify.core.css" />
+  <link rel="stylesheet" href="/assets/alertify.js-0.3.11/themes/alertify.default.css" id="toggleCSS" />
+
+  <!-- Custom fonts for this template-->
+  <link href="/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="/assets/css/sb-admin-2.min.css" rel="stylesheet">
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="/assets/vendor/jquery/jquery.min.js"></script>
+  <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="/assets/js/sb-admin-2.min.js"></script>
+
+
+
+</head>
+
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" style="background: #1cc88a">
+
+      <!-- Sidebar - Brand -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'mainPage' %}">
+        <div class="sidebar-brand-icon rotate-n-15">
+          <i><img src="../assets/icons/rpiGif2.gif" class="singleContainer_icon" /></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">GrowSmart</div>
+      </a>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+
+
+
+      {% block content %}
+      {% endblock %}
+
+  </div>
+  <!-- /.container-fluid -->
+
+  </div>
+  <!-- End of Main Content -->
+
+  <!-- Footer -->
+  <footer class="sticky-footer bg-white">
+    <div class="container my-auto">
+      <div class="copyright text-center my-auto">
+        <span>Copyright &copy; A.G.E 2020</span>
+      </div>
+    </div>
+  </footer>
+  <!-- End of Footer -->
+
+  </div>
+  <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+</body>
+
+<script>
+
+
+  $("#onFan").click(function(e) {
+
+    e.preventDefault();
+    $.ajax({
+      type: 'POST',
+      url: '{% url "mainPage" %}',
+      data: {
+
+        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+        action: 'onFan',
+
+      },
+      success: function(json) {
+        document.getElementById("mainForm").reset();
+        $('#labelFans').text('On');
+      },
+
+    });
+    alertify.custom = alertify.extend("custom");
+    alertify.custom("Fans Activated");
+  });
+
+
+</script>
+
+</html>
