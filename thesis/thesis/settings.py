@@ -25,7 +25,8 @@ SECRET_KEY = 'lv+!*wdw#c!a=nvtk7=)t_p)2l&#3uu5x6jqjcc7)zwo7ez4^#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
 
 
 # Application definition
@@ -75,10 +76,15 @@ WSGI_APPLICATION = 'thesis.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'thesisDatabase',
+        'USER': 'danedb',
+        'PASSWORD': 'abc123',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
+
 
 
 # Password validation
