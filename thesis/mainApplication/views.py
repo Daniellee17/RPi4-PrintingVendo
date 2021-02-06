@@ -8,6 +8,10 @@ from django.http import JsonResponse
 import os, sys, subprocess
 import time, pprint, cups
 
+#4 Landscape
+#5 Portrait
+orientation = '6'
+
 # Create your views here.
 def mainPage(response):
 
@@ -29,8 +33,8 @@ def mainPage(response):
         print("~Air Circulation System Activated~")
         print(" ")
 
-        opener ="open" if sys.platform == "darwin" else "xdg-open"
-        subprocess.call([opener, 'print.pdf'])
+        #opener ="open" if sys.platform == "darwin" else "xdg-open"
+        #subprocess.call([opener, 'print.pdf'])
 
         conn = cups.Connection()
         printers = conn.getPrinters ()
@@ -44,8 +48,8 @@ def mainPage(response):
             printer = list(printers.keys())[0]
             print("Default2:", printer)
 
-        myfile = "./test.txt"
-        pid = conn.printFile(printer, myfile, "test", {})
+        myfile = "./assets/print/a.pdf"
+        pid = conn.printFile(printer, myfile, "test", {'orientation-requested': orientation})
         while conn.getJobs().get(pid, None) is not None:
             time.sleep(1)
         #done
